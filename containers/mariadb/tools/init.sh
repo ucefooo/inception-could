@@ -35,5 +35,8 @@ done
 # Execute the processed SQL file
 mysql < /setup_database_processed.sql
 
+mysqladmin shutdown
+
 # Keep the script running to keep container alive
-tail -f /var/log/mysql/error.log 
+# tail -f /var/log/mysql/error.log 
+exec "$@"

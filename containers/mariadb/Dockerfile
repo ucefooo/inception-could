@@ -12,4 +12,6 @@ RUN apt-get update -y && \
     chown -R mysql:mysql /var/log/mysql && \
     chmod +x /init.sh
 
-CMD [ "/init.sh" ]
+ENTRYPOINT [ "/init.sh" ]
+
+CMD [ "mysqld" ]

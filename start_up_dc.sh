@@ -9,6 +9,7 @@ fi
 # First run the startup script from containers/tools
 echo "Setting up directories..."
 chmod +x ./containers/tools/start_up.sh
+sed -i '' "s|<USERNAME>|$(whoami)|g" .env
 ./containers/tools/start_up.sh
 
 # Check if the previous command was successful

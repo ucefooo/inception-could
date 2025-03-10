@@ -1,6 +1,7 @@
 #!/bin/bash
 
-DATA_PATH="/Users/youssama/Desktop/data/"
+# DATA_PATH="/Users/$(whoami)/Desktop/data/"
+DATA_PATH="/home/data/"
 WP_DATA_PATH="${DATA_PATH}wordpress/"
 DB_DATA_PATH="${DATA_PATH}database/"
 

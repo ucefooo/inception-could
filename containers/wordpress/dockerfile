@@ -11,11 +11,6 @@ RUN apt-get update -y && \
     wget \
     php7.3-fpm \
     php7.3-mysql \
-    php7.3-curl \
-    php7.3-json \
-    php7.3-mbstring \
-    php7.3-xml \
-    php7.3-zip \
     curl && \
     sed -i 's/.*listen = \/run\/php\/php7.3-fpm.sock*./listen = 9000\n/' /etc/php/7.3/fpm/pool.d/www.conf && \
     service php7.3-fpm start && \

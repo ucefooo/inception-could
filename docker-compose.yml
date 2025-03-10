@@ -9,7 +9,7 @@ services:
       - "443:443"
       - "80:80"
     volumes:
-      - myWpVm:/var/www/html/
+      - wordpress_volume_data:/var/www/html/
     restart: always
     networks:
       - myNetwork
@@ -24,7 +24,7 @@ services:
     ports:
       - 9000
     volumes:
-      - myWpVm:/var/www/html/
+      - wordpress_volume_data:/var/www/html/
     env_file:
       - .env
     restart: always
@@ -41,20 +41,20 @@ services:
     env_file:
       - .env
     volumes:
-      - myDbVm:/var/lib/mysql/
+      - database_volume_data:/var/lib/mysql/
     restart: always
     networks:
       - myNetwork
 
 
 volumes:
-  myWpVm:
+  wordpress_volume_data:
     driver: local
     driver_opts:
       type: none
       device: ${WP_DATA_PATH}
       o: bind
-  myDbVm:
+  database_volume_data:
     driver: local
     driver_opts:
       type: none

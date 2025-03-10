@@ -21,8 +21,13 @@ sudo systemctl start docker
 sudo systemctl enable docker
 
 if [ -f "docker-compose.yml" ]; then
-    chmod +x tools/wp_script.sh
-    docker-compose up -d
+    chmod +x containers/wordpress/tools/wp_script.sh
+    chmod +x containers/tools/start_up.sh
+    chmod +x containers/nginx/config/config-nginx
+    chmod +x containers/mariadb/tools/init.sh
+    chmod +x start_up_dc.sh
+    ./start_up_dc.sh
+    # docker-compose up -d
 else
     echo "Please make sure to place your docker-compose.yml file in the same directory as this script."
 fi
