@@ -1,0 +1,34 @@
+FROM debian:buster
+
+# Create working directory
+WORKDIR /var/www/html
+
+# Copy script to a proper location
+COPY ./tools/wp_script.sh /usr/local/bin/wp_script.sh
+
+RUN apt-get update -y && \
+    apt-get install -y \
+    wget \
+    php7.3-fpm \
+    php7.3-mysql \
+    php7.3-curl \
+    php7.3-json \
+    php7.3-mbstring \
+    php7.3-xml \
+    php7.3-zip \
+    curl && \
+    sed -i 's/.*listen = \/run\/php\/php7.3-fpm.sock*./listen = 9000\n/' /etc/php/7.3/fpm/pool.d/www.conf && \
+    service php7.3-fpm start && \
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x wp-cli.phar && \
+    mv wp-cli.phar /usr/local/bin/wp && \
+    curl -o /usr/local/bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x /usr/local/bin/wp-cli.phar && \
+    ln -sf /usr/local/bin/wp-cli.phar /usr/local/bin/wp && \
+    mkdir -p /var/www/.wp-cli/cache && \
+    chmod -R 777 /var/www/.wp-cli && \
+    chmod +x /usr/local/bin/wp_script.sh
+
+EXPOSE 9000
+
+CMD [ "bash", "/usr/local/bin/wp_script.sh" ]
